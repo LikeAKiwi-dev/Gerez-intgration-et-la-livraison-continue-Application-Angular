@@ -19,7 +19,6 @@ def is_windows() -> bool:
 
 
 def cmd_name(base: str) -> str:
-    # Sur Windows, npm / npx sont souvent des *.cmd
     if is_windows() and which(f"{base}.cmd"):
         return f"{base}.cmd"
     return base
@@ -31,16 +30,14 @@ def run(cmd: list[str], cwd: Path) -> int:
 
 
 def ensure_cmd(cmd: str, hint: str) -> bool:
-    # cmd peut être "npm" -> on vérifie aussi "npm.cmd" sur Windows
     candidates = [cmd]
     if is_windows():
-        candidates = [cmd, f"{cmd}.cmd", f"{cmd}.exe", f"{cmd}.bat"]
+        candidates += [f"{cmd}.cmd", f"{cmd}.exe", f"{cmd}.bat"]
 
     if not any(which(c) for c in candidates):
         log(f"ERREUR: '{cmd}' introuvable. {hint}")
         return False
     return True
-
 
 def clean_results_dir() -> None:
     if RESULTS_DIR.exists():
