@@ -1,0 +1,7 @@
+services:
+  front:
+    build: .
+    container_name: olympic-front
+    ports:
+      - "8081:80"
+    restart: unless-stopped
