@@ -7,6 +7,6 @@ RUN npm run build
 
 FROM nginx:1.27-alpine
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /app/dist/ /usr/share/nginx/html/
+COPY --from=build /app/dist/olympic-games-starter/browser/ /app/
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
