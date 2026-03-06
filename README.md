@@ -86,3 +86,5 @@ To publish the application to a GitLab registry, follow these steps:
    npm publish
    ```
    This will publish the package to your GitLab registry.
+
+
